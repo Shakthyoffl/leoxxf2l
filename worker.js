@@ -126,8 +126,10 @@ async function RetrieveFile(channel_id, message_id) {
 
   const file = await Bot.getFile(file_id);
   if (file.error_code) return file;
+
   return [await Bot.fetchFile(file.file_path), fName, fSize, fType];
 }
+
 
 
 // ---------- CRYPTIC ENCODER ---------- //
