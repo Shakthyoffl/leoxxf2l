@@ -89,72 +89,43 @@ async function UUID() {
 // ---------- FILE RETRIEVER ---------- //
 
 async function RetrieveFile(channel_id, message_id) {
-  const data = await Bot.editMessage(channel_id, message_id, await UUID());
-  if (data.error_code) return data;
+    let  fID; let fName; let fType; let fSize; let fLen;
+    let data = await Bot.editMessage(channel_id, message_id, await UUID());
+    if (data.error_code){return data}
+    
+    if (data.document){
+        fLen = data.document.length - 1
+        fID = data.document.file_id;
+        fName = data.document.file_name;
+        fType = data.document.mime_type;
+        fSize = data.document.file_size;
+    } else if (data.audio) {
+        fLen = data.audio.length - 1
+        fID = data.audio.file_id;
+        fName = data.audio.file_name;
+        fType = data.audio.mime_type;
+        fSize = data.audio.file_size;
+    } else if (data.video) {
+        fLen = data.video.length - 1
+        fID = data.video.file_id;
+        fName = data.video.file_name;
+        fType = data.video.mime_type;
+        fSize = data.video.file_size;
+    } else if (data.photo) {
+        fLen = data.photo.length - 1
+        fID = data.photo[fLen].file_id;
+        fName = data.photo[fLen].file_unique_id + '.jpg';
+        fType = "image/jpg";
+        fSize = data.photo[fLen].file_size;
+    } else {
+        return ERROR_406
+    }
 
-  let file_id, fName, fType, fSize;
+    const file = await Bot.getFile(fID)
+    if (file.error_code){return file}
 
-  // Handle document
-  if (data.document) {
-    file_id = data.document.file_id;
-    fName = data.document.file_name || "file.bin";
-    fType = data.document.mime_type || "application/octet-stream";
-    fSize = data.document.file_size;
-  }
-
-  // Handle photo
-  else if (data.photo && Array.isArray(data.photo)) {
-    const p = data.photo[data.photo.length - 1];
-    file_id = p.file_id;
-    fName = (p.file_unique_id || "photo") + ".jpg";
-    fType = "image/jpeg";
-    fSize = p.file_size;
-  }
-
-  // Handle video
-  else if (data.video) {
-    file_id = data.video.file_id;
-    fName = data.video.file_name || "video.mp4";
-    fType = data.video.mime_type || "video/mp4";
-    fSize = data.video.file_size;
-  }
-
-  // Handle audio
-  else if (data.audio) {
-    file_id = data.audio.file_id;
-    fName = data.audio.file_name || "audio.mp3";
-    fType = data.audio.mime_type || "audio/mpeg";
-    fSize = data.audio.file_size;
-  }
-
-  // Handle animation (GIF)
-  else if (data.animation) {
-    file_id = data.animation.file_id;
-    fName = data.animation.file_name || "animation.gif";
-    fType = data.animation.mime_type || "image/gif";
-    fSize = data.animation.file_size;
-  }
-
-  // Handle sticker (optional)
-  else if (data.sticker) {
-    file_id = data.sticker.file_id;
-    fName = data.sticker.file_unique_id + ".webp";
-    fType = "image/webp";
-    fSize = data.sticker.file_size;
-  }
-
-  else {
-    // Still unsupported
-    return { ok: false, error_code: 406, description: "Unsupported file type" };
-  }
-
-  const file = await Bot.getFile(file_id);
-  if (file.error_code) return file;
-
-  return [await Bot.fetchFile(file.file_path), fName, fSize, fType];
+    return [await Bot.fetchFile(file.file_path), fName, fSize, fType];
 }
-
-
 
 // ---------- CRYPTIC ENCODER ---------- //
 
