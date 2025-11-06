@@ -1,11 +1,11 @@
 // ---------- Insert Your Data ---------- //
 
-const BOT_TOKEN = "8355355767:AAH6moCMT72FfRXmBB3DtvJy5gJQdhjqrUs"; // Insert your bot token.
+const BOT_TOKEN = "7636654992:AAFed5c5ddkkUYWEgbhvfQQ_FIr11Q3Aog4"; // Insert your bot token.
 const BOT_WEBHOOK = "leoxxf2l.shakthyoffl.workers.dev"; // Let it be as it is.
 const BOT_SECRET = "MySuperSecretKey_123"; // Insert a powerful secret text (only [A-Z, a-z, 0-9, _, -] are allowed).
 const BOT_OWNER = 7844061005; // Insert your telegram account id.
 const BOT_CHANNEL = -1002963111875; // Insert your telegram channel id which the bot is admin in.
-const SIA_SECRET = "Shakthy10#"; // Insert a powerful secret text and keep it safe.
+const SIA_SECRET = "Error404"; // Insert a powerful secret text and keep it safe.
 const PUBLIC_BOT = true; // Make your bot public (only [true, false] are allowed).
 
 // ---------- Do Not Modify ---------- // 
