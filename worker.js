@@ -1,6 +1,6 @@
 // ---------- YOUR SETTINGS ---------- //
 
-const BOT_TOKEN = "8406437472:AAERZmGQLOsqhGfwPh9vDQrf_pTa3XpIwL4"; // 🔒 from @BotFather
+const BOT_TOKEN = "8355355767:AAEVXfNMK2se1BX6kuW7obOWFG9xH5KLsds"; // 🔒 from @BotFather
 const BOT_WEBHOOK = "https://leoxxf2l.shakthyoffl.workers.dev"; // e.g. https://leoxxf2l.shakthyoffl.workers.dev
 const BOT_SECRET = "MySuperSecretKey_123"; // [A-Z, a-z, 0-9, _, -]
 const BOT_OWNER = 7844061005; // your Telegram user id
