@@ -1,7 +1,7 @@
 // ---------- Insert Your Data ---------- //
 
 const BOT_TOKEN = "8355355767:AAH6moCMT72FfRXmBB3DtvJy5gJQdhjqrUs"; // Get this from @BotFather
-const BOT_WEBHOOK = "https://leoxxf2l.shakthyoffl.workers.dev/"; // e.g. https://leoxxf2l.shakthyoffl.workers.dev
+const BOT_WEBHOOK = "leoxxf2l.shakthyoffl.workers.dev/"; // e.g. https://leoxxf2l.shakthyoffl.workers.dev
 const BOT_SECRET = "MySuperSecretKey_123"; // Only [A-Z, a-z, 0-9, _, -]
 const BOT_OWNER = 7844061005; // Your Telegram user ID (from @idbot)
 const BOT_CHANNEL = -1002963111875; // Channel ID (bot must be admin)
