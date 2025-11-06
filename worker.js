@@ -5,7 +5,7 @@ const BOT_WEBHOOK = "leoxxf2l.shakthyoffl.workers.dev/"; // e.g. https://leoxxf2
 const BOT_SECRET = "MySuperSecretKey_123"; // Only [A-Z, a-z, 0-9, _, -]
 const BOT_OWNER = 7844061005; // Your Telegram user ID (from @idbot)
 const BOT_CHANNEL = -1002963111875; // Channel ID (bot must be admin)
-const SIA_SECRET = "Error404"; // A strong random key
+const SIA_SECRET = "1TamilMovie"; // A strong random key
 const PUBLIC_BOT = true; // true = anyone can use bot, false = private
 
 // ---------- Do Not Modify Below ---------- //
