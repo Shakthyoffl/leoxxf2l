@@ -89,38 +89,62 @@ async function UUID() {
 // ---------- FILE RETRIEVER ---------- //
 
 async function RetrieveFile(channel_id, message_id) {
-  let data = await Bot.editMessage(channel_id, message_id, await UUID());
+  const data = await Bot.editMessage(channel_id, message_id, await UUID());
   if (data.error_code) return data;
 
   let file_id, fName, fType, fSize;
 
+  // Handle document
   if (data.document) {
     file_id = data.document.file_id;
-    fName = data.document.file_name;
-    fType = data.document.mime_type;
+    fName = data.document.file_name || "file.bin";
+    fType = data.document.mime_type || "application/octet-stream";
     fSize = data.document.file_size;
-  } else if (data.photo) {
+  }
+
+  // Handle photo
+  else if (data.photo && Array.isArray(data.photo)) {
     const p = data.photo[data.photo.length - 1];
     file_id = p.file_id;
-    fName = p.file_unique_id + ".jpg";
-    fType = "image/jpg";
+    fName = (p.file_unique_id || "photo") + ".jpg";
+    fType = "image/jpeg";
     fSize = p.file_size;
-  } else if (data.video) {
+  }
+
+  // Handle video
+  else if (data.video) {
     file_id = data.video.file_id;
     fName = data.video.file_name || "video.mp4";
     fType = data.video.mime_type || "video/mp4";
     fSize = data.video.file_size;
-  } else if (data.audio) {
+  }
+
+  // Handle audio
+  else if (data.audio) {
     file_id = data.audio.file_id;
     fName = data.audio.file_name || "audio.mp3";
     fType = data.audio.mime_type || "audio/mpeg";
     fSize = data.audio.file_size;
-  } else if (data.animation) {
+  }
+
+  // Handle animation (GIF)
+  else if (data.animation) {
     file_id = data.animation.file_id;
     fName = data.animation.file_name || "animation.gif";
     fType = data.animation.mime_type || "image/gif";
     fSize = data.animation.file_size;
-  } else {
+  }
+
+  // Handle sticker (optional)
+  else if (data.sticker) {
+    file_id = data.sticker.file_id;
+    fName = data.sticker.file_unique_id + ".webp";
+    fType = "image/webp";
+    fSize = data.sticker.file_size;
+  }
+
+  else {
+    // Still unsupported
     return { ok: false, error_code: 406, description: "Unsupported file type" };
   }
 
